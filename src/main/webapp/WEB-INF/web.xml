@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <listener>
+        <listener-class>com.example.datastore.OfyHelper</listener-class>
+    </listener>
+
+    <!-- [START Objectify] -->
+    <filter>
+        <filter-name>ObjectifyFilter</filter-name>
+        <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ObjectifyFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--<listener>-->
+    <!--<listener-class>com.reltio.rdm.model.dao.google.OfyStorage</listener-class>-->
+    <!--</listener>-->
+    <!-- [END Objectify] -->
+
+    <servlet>
+        <servlet-name>data</servlet-name>
+        <servlet-class>com.example.datastore.DataServlet</servlet-class>
+        <init-param>
+            <param-name>readonly</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>data</servlet-name>
+        <url-pattern>/data/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>scan</servlet-name>
+        <servlet-class>com.example.datastore.ScanServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>scan</servlet-name>
+        <url-pattern>/scan/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
