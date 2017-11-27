@@ -34,7 +34,7 @@ public class DataServlet extends HttpServlet {
                     Lists.transform(part, new Function<Long, DTO>() {
                         @Override
                         public DTO apply(Long id) {
-                            return new DTO(id);
+                            return new DTO(id, true);
                         }
                     }));
         }
