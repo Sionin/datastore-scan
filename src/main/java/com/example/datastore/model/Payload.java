@@ -19,6 +19,10 @@ public class Payload {
     String value9;
 
     public Payload() {
+    }
+
+    public Payload(boolean generate) {
+        if (!generate) return;
         this.value1 = randomString();
         this.value2 = randomString();
         this.value3 = randomString();

@@ -11,7 +11,8 @@ import java.util.List;
 @Cache
 public class DTO {
 
-    @Id long id;
+    @Id
+    long id;
     List<Payload> payloads;
 
     public DTO() {
@@ -21,7 +22,16 @@ public class DTO {
         this.id = id;
         this.payloads = new ArrayList<>(10);
         for (int i = 0; i < 10; i++) {
-            payloads.add(new Payload());
+            payloads.add(new Payload(true));
+        }
+    }
+
+    public DTO(long id, boolean generate) {
+        this.id = id;
+        if (!generate) return;
+        this.payloads = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++) {
+            payloads.add(new Payload(generate));
         }
     }
 
