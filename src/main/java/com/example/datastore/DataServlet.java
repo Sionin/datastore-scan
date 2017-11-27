@@ -21,9 +21,9 @@ public class DataServlet extends HttpServlet {
         String fromParam = req.getParameter("from");
         String toParam = req.getParameter("to");
         int from = fromParam != null ? Integer.valueOf(fromParam) : 1;
-        int to = toParam != null ? Math.max(Integer.valueOf(toParam), 25000) : 1000;
+        int to = toParam != null ? Math.min(Integer.valueOf(toParam), 25000) : 1000;
 
-        final String payload = read("payload.txt");
+//        final String payload = read("payload.txt");
 
         Iterable<List<Long>> partitions = Iterables.partition(range(from, to), 100);
 
@@ -34,7 +34,7 @@ public class DataServlet extends HttpServlet {
                     Lists.transform(part, new Function<Long, DTO>() {
                         @Override
                         public DTO apply(Long id) {
-                            return new DTO(id, payload);
+                            return new DTO(id);
                         }
                     }));
         }
@@ -48,7 +48,7 @@ public class DataServlet extends HttpServlet {
         String fromParam = req.getParameter("from");
         String toParam = req.getParameter("to");
         int from = fromParam != null ? Integer.valueOf(fromParam) : 1;
-        int to = toParam != null ? Math.max(Integer.valueOf(toParam), 25000) : 1000;
+        int to = toParam != null ? Math.min(Integer.valueOf(toParam), 25000) : 1000;
 
 
         Iterable<List<Long>> partitions = Iterables.partition(range(from, to), 100);

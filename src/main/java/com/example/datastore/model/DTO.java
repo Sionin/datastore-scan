@@ -4,27 +4,33 @@ import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Cache
 public class DTO {
 
     @Id long id;
-    String payload;
+    List<Payload> payloads;
 
     public DTO() {
     }
 
-    public DTO(long id, String payload) {
+    public DTO(long id) {
         this.id = id;
-        this.payload = payload;
+        this.payloads = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++) {
+            payloads.add(new Payload());
+        }
     }
 
     public long getId() {
         return id;
     }
 
-    public String getPayload() {
-        return payload;
+    public List<Payload> getPayload() {
+        return payloads;
     }
 
     @Override

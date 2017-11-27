@@ -16,7 +16,7 @@ public class ScanServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String scrollId = req.getParameter("scrollId");
         final String limitParam = req.getParameter("limit");
-        final int limit = limitParam != null ? Math.max(Integer.valueOf(limitParam), 25000) : 1000;
+        final int limit = limitParam != null ? Math.min(Integer.valueOf(limitParam), 25000) : 1000;
 
         int counter = 0;
         StringBuffer sb = new StringBuffer(limit * 8);
